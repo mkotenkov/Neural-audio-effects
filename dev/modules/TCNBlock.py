@@ -19,6 +19,7 @@ class TCNBlock(nn.Module):
                  stride: int = 1) -> None:
         super().__init__()
         self.cond_size = cond_size
+        self.buffer_size = buffer_size
 
         # audio
         self.act = nn.PReLU()
@@ -51,7 +52,7 @@ class TCNBlock(nn.Module):
         assert cond.shape[1] == self.cond_size
 
         audio_in =  audio
-        info = self.bias_regression(audio)[:, :, None]
+        info = torch.stack([self.bias_regression(audio)] * self.buffer_size).permute(1, 2, 0)
         a = torch.cat([audio_in, info], dim=1)
 
         audio = self.act(self.audio_conv(audio))
