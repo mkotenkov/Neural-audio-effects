@@ -24,4 +24,4 @@ class GBiasReg(nn.Module):
         global_bias_percentage = self.classifier(features)
         global_bias_samples = int(global_bias_percentage * self.buffer_size)
         return global_bias_samples
-import foo
+
