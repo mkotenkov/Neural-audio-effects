@@ -23,8 +23,8 @@ class CondWaveLearner(nn.Module):
         ).requires_grad_(False)
 
     def forward(self, cond):
-        assert cond.ndim == 2  # (batch_size, cond_size)
-        assert cond.shape[1] == self.cond_size
+        assert cond.ndim == 2, cond.shape  # (batch_size, cond_size)
+        assert cond.shape[1] == self.cond_size, f"{cond.shape[1]} != {self.cond_size}"
 
         b_mod, f_mod = torch.chunk(self.condition_adaptor(cond), chunks=2, dim=1)
 
