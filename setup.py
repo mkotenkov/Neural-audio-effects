@@ -2,7 +2,7 @@
 from setuptools import setup, find_packages
 
 setup(
-   name='foo',
+   name='modules',
    version='1.0',
    description='A useful module',
    author='Man Foo',
@@ -11,3 +11,4 @@ setup(
    install_requires=[],
    include_package_data=True
 )
+
