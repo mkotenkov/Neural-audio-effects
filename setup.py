@@ -9,4 +9,5 @@ setup(
    author_email='foomail@foo.example',
    packages=["example_package"],
    install_requires=[],
+   include_package_data=True
 )
