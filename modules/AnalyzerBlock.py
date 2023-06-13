@@ -2,7 +2,6 @@ import torch
 from torch import nn
 from torch import Tensor
 
-from utils import Conv1dCausal
 from modules import CondWaveLearner, IntelligentMerge
 
 

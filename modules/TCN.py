@@ -1,14 +1,8 @@
 from typing import List
 
-from torch import nn
-import torch
-from torch import Tensor
-
-from AnalyzerBlock import AnalyzerBlock
-from TransformBlock import TransformBlock
 from TCNBlock import TCNBlock
 
-from utils import *
+from modules.utils import *
 
 class TCN(nn.Module):
     def __init__(self,

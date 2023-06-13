@@ -1,5 +1,4 @@
 from CondWaveLearner import CondWaveLearner
-from  CondWaveLearner_NoWeights import CondWaveLearner_NoWeights
 from IntelligentMerge import IntelligentMerge
 from AnalyzerBlock import AnalyzerBlock
 from TransformBlock import TransformBlock

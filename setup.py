@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-from setuptools import setup
+from setuptools import setup, find_packages
 
 setup(
    name='foo',
@@ -7,7 +7,7 @@ setup(
    description='A useful module',
    author='Man Foo',
    author_email='foomail@foo.example',
-   packages=["example_package"],
+   packages=find_packages(),
    install_requires=[],
    include_package_data=True
 )

@@ -1,8 +1,4 @@
-from torch import nn
-import torch
-from torch import Tensor
-
-from utils import *
+from modules.utils import *
 
 class TransformBlock(nn.Module):
     def __init__(self,
