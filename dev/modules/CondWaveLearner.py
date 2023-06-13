@@ -36,8 +36,7 @@ class CondWaveLearner(nn.Module):
         mul = t * freqs[..., None] + biases[..., None]
 
         sines = torch.sin(mul)
-        sines = sines.flatten(end_dim=1)
-        sines = sines.squeeze()
+        sines = sines.flatten(start_dim=1, end_dim=2)
         return sines
 
 
@@ -51,6 +50,6 @@ if __name__ == '__main__':
         max_freq=20
     )
 
-    cond = torch.ones(32, 3)
+    cond = torch.ones(4, 3)
     res = wave_learner(cond)
     print(res.shape)
