@@ -4,6 +4,7 @@
 from pathlib import Path
 from setuptools import setup
 
+
 NAME = "Neural-audio-effects"
 DESCRIPTION = "IN DEVELOPMENT"
 URL = "https://github.com/mkotenkov/Neural-effects-development"
@@ -30,7 +31,7 @@ setup(
     author_email=EMAIL,
     python_requires=REQUIRES_PYTHON,
     url=URL,
-    packages=["ronn"],
+    packages=["modules"],
     install_requires=["torch", "torchaudio", "numpy"],
     include_package_data=True,
     license="Apache License 2.0",
