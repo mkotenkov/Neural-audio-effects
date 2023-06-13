@@ -2,11 +2,11 @@
 from setuptools import setup, find_packages
 
 setup(
-   name='modules',
+   name='n-fx-dev',
    version='1.0',
-   description='A useful module',
-   author='Man Foo',
-   author_email='foomail@foo.example',
+   description='Neural effects development',
+   author='Maksim',
+   author_email='mkoltugin@gmail.com',
    packages=find_packages(),
    install_requires=[],
    include_package_data=True
