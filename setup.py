@@ -7,5 +7,5 @@ setup(
    author='Man Foo',
    author_email='foomail@foo.example',
    packages=[],
-   install_requires=["torch", "torchaudio"],
+   install_requires=[],
 )
