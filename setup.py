@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 from setuptools import setup
 
 setup(
@@ -7,5 +8,5 @@ setup(
    author='Man Foo',
    author_email='foomail@foo.example',
    packages=["modules"],
-   install_requires=[],
+   install_requires=["torch"],
 )
