@@ -1,6 +1,6 @@
-from modules import IntelligentMerge, TransformBlock
+from dev.modules import IntelligentMerge, TransformBlock
 
-from modules.utils import *
+from dev.modules.utils import *
 
 
 class TCNBlock(nn.Module):

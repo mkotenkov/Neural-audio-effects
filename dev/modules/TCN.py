@@ -2,7 +2,7 @@ from typing import List
 
 from TCNBlock import TCNBlock
 
-from modules.utils import *
+from dev.modules.utils import *
 
 class TCN(nn.Module):
     def __init__(self,

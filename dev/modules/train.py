@@ -4,7 +4,7 @@ from matplotlib import pyplot as plt
 from torch.optim.lr_scheduler import CosineAnnealingLR
 from tqdm import trange
 
-from modules.TCN import TCN
+from dev.modules.TCN import TCN
 
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 

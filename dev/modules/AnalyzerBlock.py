@@ -2,7 +2,7 @@ import torch
 from torch import nn
 from torch import Tensor
 
-from modules import CondWaveLearner, IntelligentMerge
+from dev.modules import CondWaveLearner, IntelligentMerge
 
 
 class AnalyzerBlock(nn.Module):
