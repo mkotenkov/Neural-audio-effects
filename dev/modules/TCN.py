@@ -1,8 +1,7 @@
 from typing import List
 
-from TCNBlock import TCNBlock
-
-from dev.modules.utils import *
+from .TCNBlock import TCNBlock
+from .utils import *
 
 class TCN(nn.Module):
     def __init__(self,

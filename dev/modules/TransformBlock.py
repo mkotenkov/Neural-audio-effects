@@ -33,21 +33,3 @@ class TransformBlock(nn.Module):
 
         return audio_result
 
-
-n_samples = 48000
-n_oscs = 3
-
-t = torch.arange(n_samples) / n_samples
-t = t.repeat(n_oscs, 1)
-freq = nn.Parameter(torch.ones(n_oscs), requires_grad=True)
-print(freq)
-sin = torch.sin(freq.reshape(-1, 1) * t)
-
-
-print(sin)
-a = nn.Parameter(torch.Tensor([1.0]), requires_grad=True)
-print(a)
-
-r = torch.randn(48000)
-r = r[None, None, :]
-print(r.shape)
