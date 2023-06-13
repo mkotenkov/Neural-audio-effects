@@ -42,7 +42,7 @@ class TCNBlock(nn.Module):
         )
         self.res = nn.Conv1d(in_ch, out_ch, kernel_size=(1,), bias=False)
 
-        self.bias_regression = GBiasReg(out_ch * n_waves, buffer_size, n_layers=6)
+        self.bias_regression = GBiasReg(in_ch, buffer_size, n_layers=6)
 
         # result
         self.merge = IntelligentMerge(
