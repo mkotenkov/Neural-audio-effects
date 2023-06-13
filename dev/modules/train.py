@@ -26,8 +26,8 @@ def train(
         sample_rate=48000
 ):
     slice_len = min(x.shape[-1], slice_len)
-    x = x[None, :, :]
-    y = y[None, :, :]
+    assert x.ndim == 2 and y.ndim == 2
+    assert x.shape[1] == y.shape[1]
 
     # build the model
     model = TCN(
@@ -50,18 +50,18 @@ def train(
 
     # train
     model = model.to(device)
-    x = x.to(device)
-    y = y.to(device)
+    x = x[None, :, :].to(device)
+    y = y[None, :, :].to(device)
     optimizer = torch.optim.Adam(model.parameters(), lr)
     scheduler = CosineAnnealingLR(optimizer, T_max=n_iters, eta_min=1e-10)
     losses = []
     for _ in trange(n_iters):
         optimizer.zero_grad()
-        #         start_idx = torch.randint(0, x.shape[-1] - slice_len, (1,))[0]
-        #         x_crop = x[..., start_idx:start_idx + slice_len]
-        #         y_crop = y[..., start_idx:start_idx + slice_len]
-        x_crop = x
-        y_crop = y
+        start_idx = torch.randint(0, x.shape[-1] - slice_len, (1,))[0]
+        x_crop = x[..., start_idx:start_idx + slice_len]
+        y_crop = y[..., start_idx:start_idx + slice_len]
+        # x_crop = x
+        # y_crop = y
         cond = torch.ones(1, cond_size, device=device)
         y_hat = model(x_crop, cond)
         loss = F.mse_loss(y_hat[..., rf:], y_crop[..., rf:])
