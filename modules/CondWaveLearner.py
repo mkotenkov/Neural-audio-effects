@@ -3,8 +3,6 @@
 import torch
 import torch.nn as nn
 
-device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-
 
 class CondWaveLearner(nn.Module):
     def __init__(self, n_channels, n_waves, cond_size, min_freq, max_freq, buffer_size):
