@@ -57,11 +57,11 @@ def train(
     losses = []
     for _ in trange(n_iters):
         optimizer.zero_grad()
-        start_idx = torch.randint(0, x.shape[-1] - slice_len, (1,))[0]
-        x_crop = x[..., start_idx:start_idx + slice_len]
-        y_crop = y[..., start_idx:start_idx + slice_len]
-        # x_crop = x
-        # y_crop = y
+        # start_idx = torch.randint(0, x.shape[-1] - slice_len, (1,))[0]
+        # x_crop = x[..., start_idx:start_idx + slice_len]
+        # y_crop = y[..., start_idx:start_idx + slice_len]
+        x_crop = x
+        y_crop = y
         cond = torch.ones(1, cond_size, device=device)
         y_hat = model(x_crop, cond)
         loss = F.mse_loss(y_hat[..., rf:], y_crop[..., rf:])
