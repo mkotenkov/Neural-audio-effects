@@ -1,5 +1,6 @@
 from .IntelligentMerge import IntelligentMerge
 from .CondWaveLearner import CondWaveLearner
+from .GBiasReg import GBiasReg
 from .utils import *
 
 
@@ -41,6 +42,8 @@ class TCNBlock(nn.Module):
         )
         self.res = nn.Conv1d(in_ch, out_ch, kernel_size=(1,), bias=False)
 
+        self.bias_regression = GBiasReg(out_ch * n_waves, buffer_size, n_layers=6)
+
         # result
         self.merge = IntelligentMerge(
             a_channels=out_ch * n_waves,
@@ -57,10 +60,12 @@ class TCNBlock(nn.Module):
         assert cond.shape[1] == self.cond_size
 
         info = self.wave_learner(cond)
+        shift_size = self.bias_regression(audio)
+        shifted_info = torch.roll(info, shift_size, dims=2)
 
         audio_in =  audio
         audio = self.act(self.audio_conv(audio))
         audio += self.res(audio_in)
 
-        result = self.merge(info, audio)
+        result = self.merge(shifted_info, audio)
         return result
