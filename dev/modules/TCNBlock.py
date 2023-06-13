@@ -1,6 +1,7 @@
-from dev.modules import IntelligentMerge, TransformBlock
-
-from dev.modules.utils import *
+from .IntelligentMerge import IntelligentMerge
+from .TransformBlock import TransformBlock
+from .CondWaveLearner import CondWaveLearner
+from .utils import *
 
 
 class TCNBlock(nn.Module):
@@ -18,7 +19,7 @@ class TCNBlock(nn.Module):
         super().__init__()
 
         max_freq = max_freq / dilation
-        self.wave_learner = CondWaveLearner_NoWeights(
+        self.wave_learner = CondWaveLearner(
             n_waves=n_waves,
             n_channels=out_ch,
             cond_size=cond_size,

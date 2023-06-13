@@ -1,4 +1,4 @@
-from dev.modules.utils import *
+from .utils import *
 
 class TransformBlock(nn.Module):
     def __init__(self,
