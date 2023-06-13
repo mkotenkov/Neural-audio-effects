@@ -4,7 +4,6 @@
 from pathlib import Path
 from setuptools import setup
 
-
 NAME = "Neural-audio-effects"
 DESCRIPTION = "IN DEVELOPMENT"
 URL = "https://github.com/mkotenkov/Neural-effects-development"
@@ -16,7 +15,7 @@ VERSION = "0.1.0"
 HERE = Path(__file__).parent
 
 try:
-    with open(HERE / "README.md", encoding="utf-8") as f:
+    with open(HERE / "readme.md", encoding="utf-8") as f:
         long_description = "\n" + f.read()
 except FileNotFoundError:
     long_description = DESCRIPTION
