@@ -2,8 +2,8 @@ import torch
 from torch import nn
 from torch import Tensor
 
-from dev.modules import CondWaveLearner, IntelligentMerge
-
+from .CondWaveLearner import CondWaveLearner
+from .IntelligentMerge import IntelligentMerge
 
 class AnalyzerBlock(nn.Module):
     def __init__(self, wave_learner_params : dict, a_channels, b_channels) -> None:
