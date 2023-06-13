@@ -38,8 +38,8 @@ def train(
         max_freq=max_freq,
         channels=[n_channels] * n_layers if channels is None else channels,
         dilations=[dilation_growth ** idx for idx in range(n_layers)] if dilations is None else dilations,
-        in_ch=x.shape[1],
-        out_ch=y.shape[1]
+        in_ch=x.shape[0],
+        out_ch=y.shape[0]
     )
 
     # print info
