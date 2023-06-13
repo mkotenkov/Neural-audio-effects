@@ -8,7 +8,7 @@ setup(
    author='Maksim',
    author_email='mkoltugin@gmail.com',
    packages=find_packages(),
-   install_requires=[],
+   install_requires=["torch"],
    include_package_data=True
 )
 
