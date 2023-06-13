@@ -56,7 +56,7 @@ class TCNBlock(nn.Module):
         assert cond.ndim == 2  # (batch_size, cond_size)
         assert cond.shape[1] == self.cond_size
 
-        info = self.wave_learner(audio)
+        info = self.wave_learner(cond)
 
         audio_in =  audio
         audio = self.act(self.audio_conv(audio))
