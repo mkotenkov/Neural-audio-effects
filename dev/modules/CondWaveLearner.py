@@ -42,15 +42,14 @@ class CondWaveLearner(nn.Module):
 
 if __name__ == '__main__':
     wave_learner = CondWaveLearner(
-        n_waves=3,
+        n_waves=20,
         n_channels=2,
         cond_size=3,
-        buffer_size=7,
+        buffer_size=44100,
         min_freq=1,
         max_freq=20
     )
 
-    cond = torch.ones(1, 3)
+    cond = torch.ones(4, 3)
     res = wave_learner(cond)
-    print(res)
-
+    print(res.shape)

@@ -1,7 +1,5 @@
-import torch
-
 from .IntelligentMerge import IntelligentMerge
-from .GBiasReg import GBiasReg
+from .CondWaveLearner import CondWaveLearner
 from .utils import *
 
 
@@ -19,7 +17,17 @@ class TCNBlock(nn.Module):
                  stride: int = 1) -> None:
         super().__init__()
         self.cond_size = cond_size
-        self.buffer_size = buffer_size
+
+        # info
+        max_freq = max_freq / dilation
+        self.wave_learner = CondWaveLearner(
+            n_waves=n_waves,
+            n_channels=out_ch,
+            cond_size=cond_size,
+            buffer_size=buffer_size,
+            min_freq=min_freq,
+            max_freq=max_freq
+        )
 
         # audio
         self.act = nn.PReLU()
@@ -31,14 +39,11 @@ class TCNBlock(nn.Module):
             dilation=dilation,
             bias=True,
         )
-        # self.res = nn.Conv1d(in_ch, out_ch, kernel_size=(1,), bias=False)
-
-        self.bias_regression = GBiasReg(in_ch, buffer_size, n_layers=6)
-        n_features = self.bias_regression.extractor_out_size
+        self.res = nn.Conv1d(in_ch, out_ch, kernel_size=(1,), bias=False)
 
         # result
         self.merge = IntelligentMerge(
-            a_channels=in_ch + n_features,
+            a_channels=out_ch * n_waves,
             b_channels=out_ch,
             out_channels=out_ch,
             hidden_size=64,
@@ -51,13 +56,11 @@ class TCNBlock(nn.Module):
         assert cond.ndim == 2  # (batch_size, cond_size)
         assert cond.shape[1] == self.cond_size
 
+        info = self.wave_learner(cond)
+
         audio_in =  audio
-        info = torch.stack([self.bias_regression(audio)] * self.buffer_size).permute(1, 2, 0)
-        a = torch.cat([audio_in, info], dim=1)
-
         audio = self.act(self.audio_conv(audio))
+        audio += self.res(audio_in)
 
-        result = self.merge(a, audio)
-
+        result = self.merge(info, audio)
         return result
-
