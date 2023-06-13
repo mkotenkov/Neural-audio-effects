@@ -7,5 +7,5 @@ setup(
    author='Man Foo',
    author_email='foomail@foo.example',
    packages=["modules"],
-   install_requires=["torch", "torchaudio", "numpy"],
+   install_requires=["torch", "torchaudio"],
 )
