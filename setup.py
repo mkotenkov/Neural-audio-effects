@@ -6,6 +6,6 @@ setup(
    description='A useful module',
    author='Man Foo',
    author_email='foomail@foo.example',
-   packages=[],
+   packages=["modules"],
    install_requires=[],
 )
