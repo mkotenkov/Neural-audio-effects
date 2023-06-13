@@ -22,7 +22,8 @@ def train(
         min_freq=0.5,
         max_freq=100,
         dilations=None,
-        channels=None
+        channels=None,
+        sample_rate=48000
 ):
     slice_len = min(x.shape[-1], slice_len)
     x = x[None, :, :]
