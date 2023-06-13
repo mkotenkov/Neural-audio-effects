@@ -1,0 +1,18 @@
+текущая версия очень круто звучит на мурохамма -> реверб
+
+train:
+
+buffer_size = 240_000
+model = train(
+        x, y,
+        n_iters=1000, # for good results set 5000
+        lr=0.01,  # 0.002
+        slice_len=buffer_size, #240000
+        dilation_growth=7,
+        n_layers=5,
+        n_channels=17,
+        n_waves=10, #10 leftright
+        min_freq=1, #1 leftright
+        max_freq=100, #100 leftright
+        sample_rate=sample_rate
+)
