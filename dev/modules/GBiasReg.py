@@ -15,13 +15,19 @@ class GBiasReg(nn.Module):
         self.feature_extractor = nn.Sequential(*layers)
         self.extractor_out_size = self.buffer_size // 2 ** n_layers
 
-        self.classifier = nn.Sequential(
-            nn.Linear(self.extractor_out_size, 1), nn.Sigmoid()
-        )
+        # self.classifier = nn.Sequential(
+        #     nn.Linear(self.extractor_out_size, 1), nn.Sigmoid()
+        # )
 
     def forward(self, x):
         features = self.feature_extractor(x).flatten(start_dim=1)
-        global_bias_percentage = self.classifier(features)
-        global_bias_samples = int(global_bias_percentage * self.buffer_size)
-        return global_bias_samples
+        # global_bias_percentage = self.classifier(features)
+        # global_bias_samples = int(global_bias_percentage * self.buffer_size)
+        return features
 
+
+if __name__ == '__main__':
+    reg = GBiasReg(9, 48000, 9)
+
+    inp = torch.randn(32, 9, 48000)
+    print(reg(inp).shape)

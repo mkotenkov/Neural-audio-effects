@@ -1,3 +1,5 @@
+import torch
+
 from .IntelligentMerge import IntelligentMerge
 from .GBiasReg import GBiasReg
 from .utils import *
@@ -30,11 +32,12 @@ class TCNBlock(nn.Module):
         )
         # self.res = nn.Conv1d(in_ch, out_ch, kernel_size=(1,), bias=False)
 
-        # self.bias_regression = GBiasReg(in_ch, buffer_size, n_layers=6)
+        self.bias_regression = GBiasReg(in_ch, buffer_size, n_layers=6)
+        n_features = self.bias_regression.extractor_out_size
 
         # result
         self.merge = IntelligentMerge(
-            a_channels=in_ch,
+            a_channels=in_ch + n_features,
             b_channels=out_ch,
             out_channels=out_ch,
             hidden_size=64,
@@ -48,8 +51,12 @@ class TCNBlock(nn.Module):
         assert cond.shape[1] == self.cond_size
 
         audio_in =  audio
+        info = self.bias_regression(audio)[:, :, None]
+        a = torch.cat([audio_in, info], dim=1)
+
         audio = self.act(self.audio_conv(audio))
 
-        result = self.merge(audio_in, audio)
+        result = self.merge(a, audio)
 
         return result
+
