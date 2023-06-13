@@ -1,4 +1,4 @@
-from .utils import *
+from dev.modules.utils import *
 
 class TransformBlock(nn.Module):
     def __init__(self,
@@ -17,7 +17,7 @@ class TransformBlock(nn.Module):
             dilation=dilation,
             bias=True,
         )
-        self.merge_info_and_audio = nn.Conv1d(out_ch + 1, out_ch, kernel_size=(1,), bias=False) # TODO info now has 1 ch
+        # self.merge_info_and_audio = nn.Conv1d(out_ch + 1, out_ch, kernel_size=(1,), bias=False) # TODO info now has 1 ch
         self.res = nn.Conv1d(in_ch, out_ch, kernel_size=(1,), bias=False)
 
     def forward(self, info: Tensor, audio: Tensor) -> Tensor:
@@ -28,7 +28,7 @@ class TransformBlock(nn.Module):
 
         stacked = torch.cat([info, audio], dim=1)
 
-        audio_result = self.merge_info_and_audio(stacked) # TODO maybe more efficient way to merge info and audio exists
+        # audio_result = self.merge_info_and_audio(stacked) # TODO maybe more efficient way to merge info and audio exists
         audio_result += self.res(audio_in)
 
         return audio_result

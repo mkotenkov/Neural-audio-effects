@@ -1,5 +1,4 @@
 from .IntelligentMerge import IntelligentMerge
-from .TransformBlock import TransformBlock
 from .CondWaveLearner import CondWaveLearner
 from .utils import *
 
@@ -17,7 +16,9 @@ class TCNBlock(nn.Module):
                  dilation: int = 1,
                  stride: int = 1) -> None:
         super().__init__()
+        self.cond_size = cond_size
 
+        # info
         max_freq = max_freq / dilation
         self.wave_learner = CondWaveLearner(
             n_waves=n_waves,
@@ -28,6 +29,19 @@ class TCNBlock(nn.Module):
             max_freq=max_freq
         )
 
+        # audio
+        self.act = nn.PReLU()
+        self.audio_conv = Conv1dCausal(
+            in_ch,
+            out_ch,
+            kernel_size,
+            stride=stride,
+            dilation=dilation,
+            bias=True,
+        )
+        self.res = nn.Conv1d(in_ch, out_ch, kernel_size=(1,), bias=False)
+
+        # result
         self.merge = IntelligentMerge(
             a_channels=out_ch * n_waves,
             b_channels=out_ch,
@@ -36,14 +50,17 @@ class TCNBlock(nn.Module):
             act_func=nn.Tanh()
         )
 
-        self.transformer = TransformBlock(in_ch, out_ch, kernel_size, dilation, stride)
 
     def forward(self, audio: Tensor, cond: Tensor) -> Tensor:
         assert audio.ndim == 3  # (batch_size, in_ch, samples)
+        assert cond.ndim == 2  # (batch_size, cond_size)
+        assert cond.shape[1] == self.cond_size
 
-        info = self.wave_learner(cond)
-        audio = self.transformer(info, audio)
+        info = self.wave_learner(audio)
+
+        audio_in =  audio
+        audio = self.act(self.audio_conv(audio))
+        audio += self.res(audio_in)
 
         result = self.merge(info, audio)
-
         return result
