@@ -35,23 +35,23 @@ class IntelligentMerge(nn.Module):
 if __name__ == '__main__':
     merge = IntelligentMerge(
         a_channels=2,
-        b_channels=1,
-        out_channels=1,
+        b_channels=11,
+        out_channels=3,
         hidden_size=64,
         act_func=nn.Tanh()
     )
 
     a_example = torch.randn(2, 2, 7)
-    b_example = torch.randn(2, 1, 7)
+    b_example = torch.randn(2, 11, 7)
 
     res = merge(a_example, b_example)
 
-    print("a:")
-    print(a_example, "\n")
-
-    print("b:")
-    print(b_example, "\n")
+    # print("a:")
+    # print(a_example, "\n")
+    #
+    # print("b:")
+    # print(b_example, "\n")
 
     print("res:")
-    print(res)
+    # print(res)
     print(res.shape)
