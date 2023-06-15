@@ -28,7 +28,6 @@ class TCNBlock(nn.Module):
             dilation=dilation,
             bias=True,
         )
-        # self.res = nn.Conv1d(in_ch, out_ch, kernel_size=(1,), bias=False)
 
         # self.bias_regression = GBiasReg(in_ch, buffer_size, n_layers=6)
 
