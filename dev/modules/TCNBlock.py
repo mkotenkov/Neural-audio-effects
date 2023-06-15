@@ -1,16 +1,15 @@
 from .IntelligentMerge import IntelligentMerge
 from .CondIntelligentMerge import CondIntelligentMerge
+from .WaveLearner import WaveLearner
 from .GBiasReg import GBiasReg
 from .utils import *
 
 
 class TCNBlock(nn.Module):
     def __init__(self,
-                 n_waves,
+                 n_cores,
                  cond_size,
                  buffer_size,
-                 min_freq,
-                 max_freq,
                  in_ch: int,
                  out_ch: int,
                  kernel_size: int = 3,
@@ -19,6 +18,13 @@ class TCNBlock(nn.Module):
         super().__init__()
         self.cond_size = cond_size
         self.in_ch = in_ch
+
+        # info
+        self.wave_learner = WaveLearner(
+            n_cores=n_cores,
+            n_channels=out_ch,
+            out_size=buffer_size
+        )
 
         # audio
         self.act = nn.PReLU()
@@ -33,8 +39,7 @@ class TCNBlock(nn.Module):
 
         # result
         self.merge = CondIntelligentMerge(
-            a_channels=in_ch,
-            b_channels=out_ch,
+            in_channels=in_ch + out_ch * 2,
             out_channels=out_ch,
             hidden_size=64,
             act_func=nn.Tanh(),
@@ -47,9 +52,13 @@ class TCNBlock(nn.Module):
         assert cond.ndim == 2  # (batch_size, cond_size)
         assert cond.shape[1] == self.cond_size
 
+        batch_size = audio.shape[0]
+        info = torch.stack([self.wave_learner()] * batch_size)
+
         audio_in =  audio
         audio = self.act(self.audio_conv(audio))
 
-        result = self.merge(audio_in, audio, cond)
+        to_merge = torch.cat([audio_in, audio, info], dim=1)
+        result = self.merge(to_merge, cond)
 
         return result
