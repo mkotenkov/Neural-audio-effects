@@ -5,11 +5,9 @@ from .utils import *
 
 class TCN(nn.Module):
     def __init__(self,
-                 n_waves,
+                 n_cores,
                  cond_size,
                  buffer_size,
-                 min_freq,
-                 max_freq,
                  channels: List[int],
                  dilations: List[int],
                  in_ch: int = 1,
@@ -38,11 +36,9 @@ class TCN(nn.Module):
             block_out_ch = curr_out_ch
 
             self.blocks.append(TCNBlock(
-                n_waves,
+                n_cores,
                 cond_size,
                 buffer_size,
-                min_freq,
-                max_freq,
                 block_in_ch,
                 block_out_ch,
                 kernel_size,

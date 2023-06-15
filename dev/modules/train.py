@@ -17,10 +17,8 @@ def train(
         dilation_growth=10,
         n_layers=3,
         n_channels=17,
-        n_waves=20,
-        cond_size=3,
-        min_freq=0.5,
-        max_freq=100,
+        n_cores=1000,
+        cond_size=0,
         dilations=None,
         channels=None,
         sample_rate=48000
@@ -31,11 +29,9 @@ def train(
 
     # build the model
     model = TCN(
-        n_waves=n_waves,
+        n_cores=n_cores,
         cond_size=cond_size,
         buffer_size=slice_len,
-        min_freq=min_freq,
-        max_freq=max_freq,
         channels=[n_channels] * n_layers if channels is None else channels,
         dilations=[dilation_growth ** idx for idx in range(n_layers)] if dilations is None else dilations,
         in_ch=x.shape[0],
@@ -57,11 +53,11 @@ def train(
     losses = []
     for _ in trange(n_iters):
         optimizer.zero_grad()
-        start_idx = torch.randint(0, x.shape[-1] - slice_len, (1,))[0]
-        x_crop = x[..., start_idx:start_idx + slice_len]
-        y_crop = y[..., start_idx:start_idx + slice_len]
-        # x_crop = x
-        # y_crop = y
+#         start_idx = torch.randint(0, x.shape[-1] - slice_len, (1,))[0]
+#         x_crop = x[..., start_idx:start_idx + slice_len]
+#         y_crop = y[..., start_idx:start_idx + slice_len]
+        x_crop = x
+        y_crop = y
         cond = torch.ones(1, cond_size, device=device)
         y_hat = model(x_crop, cond)
         loss = F.mse_loss(y_hat[..., rf:], y_crop[..., rf:])
