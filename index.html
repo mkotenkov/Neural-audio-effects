@@ -36,23 +36,27 @@
             <h3 class="text-center">Abstract</h3>
             <hr>
             <p class="pr-5 pl-5">
-                MY DESCRIPTION
+                This project aims to find creative audio-effects with neural networks. I use the Temporal Convolutional Network (TCN) proposed by Christian Steinmetz and add some modifications to it: <br>
+                1) Module IntelligentMerge is supposed to provide the facilities to more complex merge of channels;<br>
+                2) Module WaveLearner allows the model to learn how to change the effect over time.<br><br>
+
+                Trained example-models below are ready for use inside the  <a href="https://neutone.space/plugin/">Neutone VST-plugin</a>
             </p>
 
         </div>
 
 
-        <div class="section mt-4">
-            <h3 class="text-center">Demo</h3>
-            <hr>
-            <div class=" embed-responsive embed-responsive-16by9">
-                <iframe width="560" height="315" src="https://www.youtube.com/embed/Zmo8kB-SfF4"
-                        title="YouTube video player"
-                        frameborder="0"
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                        allowfullscreen></iframe>
-            </div>
-        </div>
+<!--        <div class="section mt-4">-->
+<!--            <h3 class="text-center">Demo</h3>-->
+<!--            <hr>-->
+<!--            <div class=" embed-responsive embed-responsive-16by9">-->
+<!--                <iframe width="560" height="315" src="https://www.youtube.com/embed/Zmo8kB-SfF4"-->
+<!--                        title="YouTube video player"-->
+<!--                        frameborder="0"-->
+<!--                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"-->
+<!--                        allowfullscreen></iframe>-->
+<!--            </div>-->
+<!--        </div>-->
 
         <div class="section mt-4">
             <div class="row text-center justify-content-center">
@@ -77,6 +81,7 @@
                         <td>~22 K</td>
                     </tr>
                 </table>
+                <img src="pics/original TCN.png" width="538" height="310">
                 <table class="text-center table">
                     <tr>
                         <td colspan="4">
@@ -171,6 +176,7 @@
                         <td>~1.7 K</td>
                     </tr>
                 </table>
+                <img src="pics/original TCN.png" width="538" height="310">
                 <table class="text-center table">
                     <tr>
                         <td colspan="4">
@@ -338,7 +344,7 @@
                         </td>
                     </tr>
                 </table>
-                       <h2>Experiment 4 (Reverb + distortion)</h2>
+                       <h2>Experiment 4 (Echo)</h2>
                 <table class="text-center table">
                     <tr>
                         <th>model</th>
