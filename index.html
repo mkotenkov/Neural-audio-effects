@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+  <title>Neural audio effects</title>
+  <!-- Bootstrap core CSS -->
+  <!--link href="bootstrap.min.css" rel="stylesheet"-->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+</head>
+
+<body>
+
+  <div class="text-center">
+    <div class="container"></div>
+    <h1 class="pt-5">Neural audio effects</h1>
+  </div>
+
+  <div class="container mt-4 " style="max-width: 950px; margin-left: auto; margin-right: auto;">
+    <div class="container">
+      <div class="section">
+
+        <h3 class="text-center">Abstract</h3>
+        <hr>
+        <p class="pr-5 pl-5">
+          MY DESCRIPTION
+        </p>
+
+      </div>
+
+
+      <div class="section mt-4">
+        <h3 class="text-center">Demo</h3>
+        <hr>
+        <div class=" embed-responsive embed-responsive-16by9">
+          <iframe width="560" height="315" src="https://www.youtube.com/embed/Zmo8kB-SfF4" title="YouTube video player"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen></iframe>
+        </div>
+      </div>
+
+      <div class="section mt-4">
+        <div class="row text-center justify-content-center">
+          <div class="table-responsive">
+            <h2>Examples</h2>
+
+            <hr>
+            Below are a number of example effects generated following the process described in the paper.
+            <br>
+            Pre-trained models from different effect types are available for usage in the <a
+              href="https://colab.research.google.com/github/csteinmetz1/steerable-nafx/blob/master/steerable-nafx.ipynb">Colab
+              notebook</a>.
+            <hr>
+
+            <h3>Reverb</h3>
+            <table class="text-center table">
+              <tr>
+                <th>Description</th>
+                <th></th>
+                <th>c0</th>
+                <th>c1</th>
+              </tr>
+              <tr>
+                <td colspan="4">
+                  <h5>Vocal</h5>
+                </td>
+              </tr>
+              <tr>
+                <td>Clean vocal</td>
+                <td>
+                  <audio controls>
+                    <source src="audio/reverb/fvox_clean.mp3" type="audio/mp3">
+                  </audio>
+                </td>
+                <td>-</td>
+                <td>-</td>
+              </tr>
+              <tr>
+                <td>Default reverb</td>
+                <td>
+                  <audio controls>
+                    <source src="audio/reverb/fvox_0_0_-24dB.mp3" type="audio/mp3">
+                  </audio>
+                </td>
+                <td>0</td>
+                <td>0</td>
+              </tr>
+              <tr>
+                <td>Shorter reverb</td>
+                <td>
+                  <audio controls>
+                    <source src="audio/reverb/fvox_-2_1_-24dB.mp3" type="audio/mp3">
+                  </audio>
+                </td>
+                <td>-2</td>
+                <td>1</td>
+              </tr>
+              <tr>
+                <td>Longer reverb</td>
+                <td>
+                  <audio controls>
+                    <source src="audio/reverb/fvox_-1_5_-24dB.mp3" type="audio/mp3">
+                  </audio>
+                </td>
+                <td>-1</td>
+                <td>5</td>
+              </tr>
+              <tr>
+                <td>Distortion reverb</td>
+                <td>
+                  <audio controls>
+                    <source src="audio/reverb/fvox_-7_10_0dB.mp3" type="audio/mp3">
+                  </audio>
+                </td>
+                <td>-7</td>
+                <td>10</td>
+
+          </div>
+        </div>
+      </div>
+
+
+      <hr>
+      <footer>
+      </footer>
+    </div>
+  </div>
+
+  <script type="text/javascript" src="https://cdn.rawgit.com/pcooksey/bibtex-js/5ccf967/src/bibtex_js.js"></script>
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+    integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+    integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
+    integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
+    crossorigin="anonymous"></script>
+
+</body>
+
+</html>
