@@ -1,7 +1,5 @@
 from .IntelligentMerge import IntelligentMerge
-from .CondIntelligentMerge import CondIntelligentMerge
 from .WaveLearner import WaveLearner
-from .GBiasReg import GBiasReg
 from .utils import *
 
 
@@ -38,7 +36,7 @@ class TCNBlock(nn.Module):
         )
 
         # result
-        self.merge = CondIntelligentMerge(
+        self.merge = IntelligentMerge(
             in_channels=in_ch + out_ch * 2,
             out_channels=out_ch,
             hidden_size=64,
@@ -46,6 +44,7 @@ class TCNBlock(nn.Module):
             cond_size=cond_size
         )
 
+        self.film = FiLM(cond_size, out_ch)
 
     def forward(self, audio: Tensor, cond: Tensor) -> Tensor:
         assert audio.ndim == 3  # (batch_size, in_ch, samples)
@@ -55,10 +54,14 @@ class TCNBlock(nn.Module):
         batch_size = audio.shape[0]
         info = torch.stack([self.wave_learner()] * batch_size)
 
-        audio_in =  audio
-        audio = self.act(self.audio_conv(audio))
+        audio_in = audio
+
+        audio = self.audio_conv(audio)
+        audio = self.film(audio, cond)
+        audio = self.act(audio)
 
         to_merge = torch.cat([audio_in, audio, info], dim=1)
+
         result = self.merge(to_merge, cond)
 
         return result

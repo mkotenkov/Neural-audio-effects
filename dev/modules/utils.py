@@ -32,20 +32,19 @@ class Conv1dCausal(nn.Module):  # Conv1d with cache
         return x
 
 
-def window(audio, buffer_size, drop_last=True):
-    assert audio.ndim == 3  # (batch_size, ch, n_samples)
-    s = audio.shape[2] // buffer_size
-    for i in range(s):
-        start = buffer_size * i
-        end = buffer_size * (i + 1)
-        yield audio[:, :, start:end]
-    if len(audio) > buffer_size * s and not drop_last: yield audio[:, :, buffer_size * s:]
+class FiLM(nn.Module):
+    def __init__(self,
+                 cond_dim: int,  # dim of conditioning input
+                 num_features: int,  # dim of the conv channel
+                ) -> None:
+        super().__init__()
+        self.num_features = num_features
+        self.adaptor = nn.Linear(cond_dim, 2 * num_features)
 
-
-def pair_window(audio, buffer_size):
-    for prev, curr in zip(window(audio, buffer_size), window(audio[buffer_size:], buffer_size)):
-        if len(prev) == len(curr): yield prev, curr
-
-
-def sonify(audio, sr):
-    IPython.display.display(IPython.display.Audio(data=audio, rate=sr))
+    def forward(self, x: Tensor, cond: Tensor) -> Tensor:
+        cond = self.adaptor(cond)
+        g, b = torch.chunk(cond, 2, dim=-1)
+        g = g.unsqueeze(-1)
+        b = b.unsqueeze(-1)
+        x = (x * g) + b  # Then apply conditional affine
+        return x

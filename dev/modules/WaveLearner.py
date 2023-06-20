@@ -4,6 +4,7 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 
+
 class WaveLearner(nn.Module):
     def __init__(self, n_cores, n_channels, out_size):
         super().__init__()
@@ -15,7 +16,3 @@ class WaveLearner(nn.Module):
         cores = self.cores.reshape(1, self.n_channels, -1)
         result =  F.interpolate(cores, size=self.out_size, mode="linear", align_corners=False)[0]
         return result
-
-
-if __name__ == '__main__':
-    pass
