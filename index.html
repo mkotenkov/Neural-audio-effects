@@ -139,7 +139,7 @@
                         </td>
                     </tr>
                 </table>
-                               <h2>Experiment 2 (Reverb + distortion)</h2>
+                <h2>Experiment 2 (Reverb + distortion)</h2>
                 <table class="text-center table">
                     <tr>
                         <th>model</th>
@@ -152,7 +152,8 @@
                     <tr>
                         <td>Original Christian Steinmetz' model. <a
                                 href="https://github.com/mkotenkov/Neural-audio-effects/raw/main/models/Experiment%202%20(rev).nm">Download
-                            Neutone model</a></td>
+                            Neutone model</a>
+                        </td>
                         <td>7</td>
                         <td>5</td>
                         <td>5</td>
@@ -228,6 +229,196 @@
                         <td>
                             <audio controls>
                                 <source src="examples/exp2/piano_Exp2.mp3" type="audio/mp3">
+                            </audio>
+                        </td>
+                    </tr>
+                </table>
+                <h2>Experiment 3 (Reverb + distortion)</h2>
+                <table class="text-center table">
+                    <tr>
+                        <th>model</th>
+                        <th>dilation_growth</th>
+                        <th>n_layers</th>
+                        <th>n_channels</th>
+                        <th>receptieve field</th>
+                        <th>parameters</th>
+                    </tr>
+                    <tr>
+                        <td>Modification of Christian Steinmetz' model with IntelligentMerge module. <a
+                                href="https://github.com/mkotenkov/Neural-audio-effects/raw/main/models/Experiment%202%20(rev).nm">Download
+                            Neutone model</a>
+                        </td>
+                        <td>7</td>
+                        <td>5</td>
+                        <td>5</td>
+                        <td>33613 samples (~700.3 ms)</td>
+                        <td>~1.7 K</td>
+                    </tr>
+                </table>
+                <img src="pics/Int merge TCN.png" width="538" height="310">
+                <table class="text-center table">
+                    <tr>
+                        <td colspan="4">
+                            <h5>train</h5>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>source</td>
+                        <td>
+                            <audio controls>
+                                <source src="examples/exp3/source_Exp3.wav" type="audio/mp3">
+                            </audio>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>target</td>
+                        <td>
+                            <audio controls>
+                                <source src="examples/exp3/target_Exp3.wav" type="audio/mp3">
+                            </audio>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="4">
+                            <h5>examples</h5>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Description</th>
+                        <th>Original</th>
+                        <th>Processed</th>
+                    </tr>
+                    <tr>
+                        <td>electric guitar</td>
+                        <td>
+                            <audio controls>
+                                <source src="examples/orig/egtr_clean.mp3" type="audio/mp3">
+                            </audio>
+                        </td>
+                        <td>
+                            <audio controls>
+                                <source src="examples/exp3/egtr_Exp3.mp3" type="audio/mp3">
+                            </audio>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>voice</td>
+                        <td>
+                            <audio controls>
+                                <source src="examples/orig/fvox_clean.mp3" type="audio/mp3">
+                            </audio>
+                        </td>
+                        <td>
+                            <audio controls>
+                                <source src="examples/exp3/fvox_Exp3.mp3" type="audio/mp3">
+                            </audio>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>piano</td>
+                        <td>
+                            <audio controls>
+                                <source src="examples/orig/piano_clean.mp3" type="audio/mp3">
+                            </audio>
+                        </td>
+                        <td>
+                            <audio controls>
+                                <source src="examples/exp3/piano_Exp3.mp3" type="audio/mp3">
+                            </audio>
+                        </td>
+                    </tr>
+                </table>
+                       <h2>Experiment 4 (Reverb + distortion)</h2>
+                <table class="text-center table">
+                    <tr>
+                        <th>model</th>
+                        <th>dilation_growth</th>
+                        <th>n_layers</th>
+                        <th>n_channels</th>
+                        <th>receptieve field</th>
+                        <th>parameters</th>
+                    </tr>
+                    <tr>
+                        <td>Modification of Christian Steinmetz' model with IntelligentMerge and WaveLearner modules. <a
+                                href="https://github.com/mkotenkov/Neural-audio-effects/raw/main/models/Experiment%202%20(rev).nm">Download
+                            Neutone model</a>
+                        </td>
+                        <td>7</td>
+                        <td>5</td>
+                        <td>5</td>
+                        <td>33613 samples (~700.3 ms)</td>
+                        <td>~1.7 K</td>
+                    </tr>
+                </table>
+                <img src="pics/final TCN.png" width="538" height="310">
+                <table class="text-center table">
+                    <tr>
+                        <td colspan="4">
+                            <h5>train</h5>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>source</td>
+                        <td>
+                            <audio controls>
+                                <source src="examples/exp4/source_Exp4.wav" type="audio/mp3">
+                            </audio>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>target</td>
+                        <td>
+                            <audio controls>
+                                <source src="examples/exp4/target_Exp4.wav" type="audio/mp3">
+                            </audio>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="4">
+                            <h5>examples</h5>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Description</th>
+                        <th>Original</th>
+                        <th>Processed</th>
+                    </tr>
+                    <tr>
+                        <td>electric guitar</td>
+                        <td>
+                            <audio controls>
+                                <source src="examples/orig/egtr_clean.mp3" type="audio/mp3">
+                            </audio>
+                        </td>
+                        <td>
+                            <audio controls>
+                                <source src="examples/exp4/egtr_Exp4.mp3" type="audio/mp3">
+                            </audio>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>voice</td>
+                        <td>
+                            <audio controls>
+                                <source src="examples/orig/fvox_clean.mp3" type="audio/mp3">
+                            </audio>
+                        </td>
+                        <td>
+                            <audio controls>
+                                <source src="examples/exp4/fvox_Exp4.mp3" type="audio/mp3">
+                            </audio>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>piano</td>
+                        <td>
+                            <audio controls>
+                                <source src="examples/orig/piano_clean.mp3" type="audio/mp3">
+                            </audio>
+                        </td>
+                        <td>
+                            <audio controls>
+                                <source src="examples/exp4/piano_Exp4.mp3" type="audio/mp3">
                             </audio>
                         </td>
                     </tr>
